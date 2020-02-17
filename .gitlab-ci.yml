@@ -1,0 +1,24 @@
+stages:
+  - build
+
+node_10:
+  image: node:11-alpine
+  script:
+    - npm install
+    - npm run build
+    - npm run test
+
+node_12:
+  image: node:12-alpine
+  script:
+    - npm install
+    - npm run build
+    - npm run test
+
+node_13:
+  image: node:13-alpine
+  script:
+    - npm install
+    - npm run build
+    - npm run test
+
