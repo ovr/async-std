@@ -1,6 +1,6 @@
 {
   "name": "async-std",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
