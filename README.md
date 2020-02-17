@@ -33,3 +33,22 @@ lock.execute(async () => {
 // wait when lock will be release
 await lock.drain();
 ```
+
+# Pool
+
+```javascript
+import {AsyncWorkerPool} from 'async-std';
+
+const pool = new AsyncWorkerPool(
+    async (payload: { id: number }) => {
+        // some work
+    },
+    // how many workers will be runned concurently
+    1
+);
+
+pool.execute({ id: 5 });
+
+// wait when all tasks will be executed
+await pool.drain();
+```

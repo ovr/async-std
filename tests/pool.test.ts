@@ -7,7 +7,7 @@ test('success pool', async (t) => {
 
     let resolved = 0;
 
-    const pool = new AsyncWorkerPool<number, void>(
+    const pool = new AsyncWorkerPool(
         async (payload: number) => {
             resolved += payload;
         },
@@ -26,7 +26,7 @@ test('success pool with drain', async (t) => {
 
     let resolved = 0;
 
-    const pool = new AsyncWorkerPool<number, void>(
+    const pool = new AsyncWorkerPool(
         async (payload: number) => {
             resolved += payload;
         },
@@ -48,7 +48,7 @@ test('success pool (timers) with drain', async (t) => {
 
     let resolved = 0;
 
-    const pool = new AsyncWorkerPool<number, void>(
+    const pool = new AsyncWorkerPool(
         async (payload: number) => {
             return new Promise(
                 (resolve) => {

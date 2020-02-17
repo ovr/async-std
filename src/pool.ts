@@ -19,6 +19,9 @@ export class AsyncWorkerPool<P, R = any> {
         });
     }
 
+    /**
+     * Wait when all tasks will be executed
+     */
     public async drain(): Promise<boolean>
     {
         return this.semaphore.drain();
