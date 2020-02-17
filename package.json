@@ -8,7 +8,7 @@
     "build": "./node_modules/.bin/tsc",
     "build:watch": "./node_modules/.bin/tsc -w",
     "prepublishOnly": "rm -rf dist/ && npm run build",
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "files": [
     "dist/src/*"
@@ -19,5 +19,8 @@
     "typescript": "^3.7.5"
   },
   "author": "Dmitry Patsura",
-  "license": "MIT"
+  "license": "MIT",
+  "ava": {
+    "concurrency": 1
+  }
 }

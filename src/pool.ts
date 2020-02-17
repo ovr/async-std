@@ -14,7 +14,7 @@ export class AsyncWorkerPool<P, R = any> {
 
     public async execute(payload: P): Promise<R>
     {
-        return await this.semaphore.execute(() => {
+        return this.semaphore.execute(() => {
             return this.worker(payload);
         });
     }

@@ -1,5 +1,4 @@
 import test from "ava";
-import {Semaphore} from "../src/semaphore";
 import {AsyncWorkerPool} from "../src";
 
 test('success pool', async (t) => {
