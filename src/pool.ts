@@ -18,4 +18,9 @@ export class AsyncWorkerPool<P, R = any> {
             return this.worker(payload);
         });
     }
+
+    public async drain(): Promise<boolean>
+    {
+        return this.semaphore.drain();
+    }
 }

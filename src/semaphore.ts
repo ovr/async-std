@@ -47,12 +47,6 @@ export class Semaphore {
     {
         const left = this.num - this.permits;
 
-        console.log('drain', {
-            left,
-            num: this.num,
-            permits: this.permits
-        });
-
         // It's the last task in queue
         if (left === 0 && this.queue.length === 0) {
             return true;
