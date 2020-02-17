@@ -16,6 +16,8 @@ export class Semaphore {
         if (this.permits > 0 && this.queue.length > 0) {
             const nexResolver = this.queue.shift();
             if (nexResolver) {
+                this.permits--;
+
                 nexResolver(true);
             }
         }
@@ -30,9 +32,9 @@ export class Semaphore {
 
         return new Promise(
             (resolve => {
-                setTimeout(
+                setInterval(
                     async () => {
-                        const free = this.checkDrain();
+                        const free = await this.checkDrain();
                         if (free) {
                             resolve(true);
                         }
