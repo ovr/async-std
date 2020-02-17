@@ -52,3 +52,9 @@ pool.execute({ id: 5 });
 // wait when all tasks will be executed
 await pool.drain();
 ```
+
+### LICENSE
+
+This project is open-sourced software licensed under the MIT License.
+
+See the [LICENSE](LICENSE) file for more information.
