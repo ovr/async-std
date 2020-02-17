@@ -43,7 +43,7 @@ test('success pool with drain', async (t) => {
 });
 
 test('success pool (timers) with drain', async (t) => {
-    t.timeout(2000);
+    t.timeout(50 * 100 + 1000);
 
     let resolved = 0;
 
