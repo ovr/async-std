@@ -2,6 +2,7 @@ stages:
   - build
 
 node_10:
+  stage: build
   image: node:11-alpine
   script:
     - npm install
@@ -9,6 +10,7 @@ node_10:
     - npm run test
 
 node_12:
+  stage: build
   image: node:12-alpine
   script:
     - npm install
@@ -16,9 +18,9 @@ node_12:
     - npm run test
 
 node_13:
+  stage: build
   image: node:13-alpine
   script:
     - npm install
     - npm run build
     - npm run test
-
