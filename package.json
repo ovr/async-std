@@ -2,11 +2,12 @@
   "name": "aaa",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "build:watch": "./node_modules/.bin/tsc -w",
-    "prepublishOnly": "rm -rf dist/ && npm run tsc",
+    "prepublishOnly": "rm -rf dist/ && npm run build",
     "test": "ava"
   },
   "devDependencies": {
