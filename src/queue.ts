@@ -9,7 +9,6 @@ export class AsyncQueue<P, R = any> {
     protected readonly pool: AsyncWorkerPool<P, R>;
     protected readonly queue: AsyncQueueItem<P> = [];
     protected readonly semaphore: Semaphore;
-    protected working: boolean = false;
 
     constructor(
         readonly worker: AsyncQueueWorker<P, R>,

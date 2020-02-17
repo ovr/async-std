@@ -36,6 +36,8 @@ await lock.drain();
 
 # Pool
 
+> Pool of workers to execute code concurrency with limit of concurrent operations at once.
+
 ```javascript
 import {AsyncWorkerPool} from 'async-std';
 
@@ -48,6 +50,30 @@ const pool = new AsyncWorkerPool(
 );
 
 pool.execute({ id: 5 });
+
+// wait when all tasks will be executed
+await pool.drain();
+```
+
+# AsyncQueue
+
+> Sometimes it's needed to control the limits of tasks that will be executed by pools of workers.
+
+```javascript
+import {AsyncQueue, AsyncWorkerPool} from 'async-std';
+
+const pool = new AsyncWorkerPool(
+    async (payload: { id: number }) => {
+        // some work
+    },
+    // how many workers will be runned concurently
+    1
+);
+
+const queue = new AsyncQueue(pool, 100);
+
+// Resolve promise that put task in queue that will be resolved by pool of workers
+await pool.push({ id: 5 });
 
 // wait when all tasks will be executed
 await pool.drain();
