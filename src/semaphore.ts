@@ -75,7 +75,7 @@ export class Semaphore {
         await this.acquire();
 
         try {
-            return func();
+            return await func();
         } finally {
             this.release();
         }
