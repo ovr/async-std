@@ -1,0 +1,19 @@
+{
+  "name": "aaa",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "build:watch": "./node_modules/.bin/tsc -w",
+    "prepublishOnly": "rm -rf dist/ && npm run tsc",
+    "test": "ava"
+  },
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1",
+    "ava": "^3.3.0",
+    "typescript": "^3.7.5"
+  },
+  "author": "Dmitry Patsura",
+  "license": "MIT"
+}
