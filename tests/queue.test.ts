@@ -67,8 +67,8 @@ test('success queue with worker pool (timers)', async (t) => {
                         console.log('fetch executed', payload);
 
                         setTimeout(
-                            () => {
-                                update.push(payload);
+                            async () => {
+                                await update.push(payload);
 
                                 resolver();
                             },

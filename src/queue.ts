@@ -29,16 +29,21 @@ export class AsyncQueue<P, R = any> {
 
     public async push(task: P)
     {
-        return this.semaphore.execute(
-            async () => {
-                return this.pool.execute(task);
-            }
-        );
+        await this.semaphore.acquire();
+
+        try {
+            this.pool.execute(task);
+        } finally {
+            this.semaphore.release();
+        }
     }
 
     public async drain()
     {
-        return this.semaphore.drain();
+        return Promise.all([
+            this.semaphore.drain(),
+            this.pool.drain(),
+        ]);
     }
 }
 
