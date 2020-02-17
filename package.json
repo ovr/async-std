@@ -10,6 +10,9 @@
     "prepublishOnly": "rm -rf dist/ && npm run build",
     "test": "ava"
   },
+  "files": [
+    "dist/src/*"
+  ],
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "ava": "^3.3.0",
