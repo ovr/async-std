@@ -102,6 +102,22 @@ await asyncInterval(
 )
 ```
 
+## retry
+
+> Retry function on exception
+
+```javascript
+await retry(
+    async () => {
+        //
+    },
+    {
+        // retry 3 times on exceptions
+        retriesMax: 3,
+    }
+)
+```
+
 ### LICENSE
 
 This project is open-sourced software licensed under the MIT License.
