@@ -79,6 +79,29 @@ await pool.push({ id: 5 });
 await pool.drain();
 ```
 
+# Helpers
+
+## asyncInterval
+
+> Execute function periodically (interval) before it will return value !== false
+
+```javascript
+await asyncInterval(
+    async () => {
+        const user = await myawesomefn();
+        if (user) {
+            // doing somethings
+
+            return user;
+        }
+
+        // return false to retry it
+        return false;
+    },
+    100
+)
+```
+
 ### LICENSE
 
 This project is open-sourced software licensed under the MIT License.
