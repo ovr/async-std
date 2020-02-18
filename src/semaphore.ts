@@ -1,3 +1,4 @@
+import {asyncInterval} from "./timers";
 
 export class Semaphore {
     protected readonly queue: ((value: boolean) => void)[] = [];
@@ -30,19 +31,7 @@ export class Semaphore {
             return true;
         }
 
-        return new Promise(
-            (resolve => {
-                setInterval(
-                    async () => {
-                        const free = await this.checkDrain();
-                        if (free) {
-                            resolve(true);
-                        }
-                    },
-                    100
-                );
-            })
-        )
+        return asyncInterval(async () => this.checkDrain(), 100);
     }
 
     protected async checkDrain()
