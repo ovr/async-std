@@ -15,26 +15,50 @@ export class Semaphore {
         this.permits++;
 
         if (this.permits > 0 && this.queue.length > 0) {
-            const nexResolver = this.queue.shift();
-            if (nexResolver) {
-                this.permits--;
+            this.runQueue();
+        }
+    }
 
-                nexResolver(true);
-            }
+    protected runQueue()
+    {
+        const nexResolver = this.queue.shift();
+        if (nexResolver) {
+            this.permits--;
+
+            nexResolver(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    public releaseAllPermits(): void {
+        this.permits = this.num;
+
+        if (this.queue.length > 0) {
+            while (this.permits > 0 && this.runQueue()) {}
+        }
+    }
+
+    public releaseAll(): void {
+        this.permits = this.num;
+
+        if (this.queue.length > 0) {
+            while (this.runQueue()) {}
         }
     }
 
     public async drain(): Promise<boolean>
     {
-        const free = await this.checkDrain();
+        const free = this.isFree();
         if (free) {
             return true;
         }
 
-        return asyncInterval(async () => this.checkDrain(), 100);
+        return asyncInterval(async () => this.isFree(), 100);
     }
 
-    protected async checkDrain()
+    public isFree()
     {
         const left = this.num - this.permits;
 
