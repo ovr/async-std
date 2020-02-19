@@ -80,7 +80,7 @@ await pool.drain();
 
 # AsyncQueue
 
-> Sometimes it's needed to control the limits of tasks that will be executed by pools of workers.
+> Sometimes it's needed to control the limits of tasks that will be executed by pools of workers. FIFO (first-in-first-out)
 
 ```javascript
 import {AsyncQueue, AsyncWorkerPool} from 'async-std';
@@ -94,6 +94,30 @@ const pool = new AsyncWorkerPool(
 );
 
 const queue = new AsyncQueue(pool, 100);
+
+// Resolve promise that put task in queue that will be resolved by pool of workers
+await pool.push({ id: 5 });
+
+// wait when all tasks will be executed
+await pool.drain();
+```
+
+# AsyncStack
+
+> Similar as AsyncQueue but it's FILO (first-in-last-out)
+
+```javascript
+import {AsyncStack, AsyncWorkerPool} from 'async-std';
+
+const pool = new AsyncWorkerPool(
+    async (payload: { id: number }) => {
+        // some work
+    },
+    // how many workers will be runned concurently
+    1
+);
+
+const queue = new AsyncStack(pool, 100);
 
 // Resolve promise that put task in queue that will be resolved by pool of workers
 await pool.push({ id: 5 });
