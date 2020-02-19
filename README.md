@@ -182,7 +182,7 @@ class Execute {
 
             this.lock.resolve();
         })
-        
+
         await this.lock.promise;
     }
 }
