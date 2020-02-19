@@ -118,6 +118,29 @@ await retry(
 )
 ```
 
+## createPromiseLock
+
+> Lock execution context in place by promise and ability to resolve this lock.
+
+```javascript
+import {createPromiseLock, PromiseLock} from 'async-std';
+
+class Execute {
+    protected readonly lock: PromiseLock = createPromiseLock();
+
+    async function execute()
+    {
+        process.on('SIGTERM', async () => {
+            console.info('Got SIGTERM. Graceful shutdown start', new Date().toISOString());
+
+            this.lock.resolve();
+        })
+        
+        await this.lock.promise;
+    }
+}
+```
+
 ### LICENSE
 
 This project is open-sourced software licensed under the MIT License.
