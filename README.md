@@ -34,7 +34,7 @@ lock.execute(async () => {
 await lock.drain();
 ```
 
-# Pool
+# AsyncWorkerPool
 
 > Pool of workers to execute code concurrency with limit of concurrent operations at once.
 
@@ -47,6 +47,29 @@ const pool = new AsyncWorkerPool(
     },
     // how many workers will be runned concurently
     1
+);
+
+pool.execute({ id: 5 });
+
+// wait when all tasks will be executed
+await pool.drain();
+```
+
+# AsyncRateLimitWorkerPool
+
+> Pool of workers to execute code concurrency with limit of concurrent operations at one time period (N executes in X time window).
+
+```javascript
+import {AsyncRateLimitWorkerPool} from 'async-std';
+
+const pool = new AsyncRateLimitWorkerPool(
+    async (payload: { id: number }) => {
+        // some work
+    },
+    // how many workers will be runned concurently
+    5,
+    // 5 jobs will be executed every 1 second
+    1000
 );
 
 pool.execute({ id: 5 });
