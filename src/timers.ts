@@ -1,4 +1,19 @@
-import {InvalidArgumentException} from "./errors";
+import {InvalidArgumentException, TimeoutException} from "./errors";
+
+export async function asyncTimeout(ms: number, promise: Promise<any>) {
+    return new Promise((resolve, reject) => {
+        setTimeout(
+            () => {
+                reject(
+                    new TimeoutException(`Timeout reached after ${ms}ms`)
+                )
+            },
+            ms
+        );
+
+        promise.then(resolve, reject);
+    });
+}
 
 export function asyncInterval<T>(fn: () => Promise<T|false>, timeout: number): Promise<T> {
     return new Promise<T>(
