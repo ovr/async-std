@@ -58,6 +58,11 @@ export class Semaphore {
         return asyncInterval(async () => this.isFree(), 100);
     }
 
+    public getFreePermits(): number
+    {
+        return this.num - this.permits;
+    }
+
     public isFree()
     {
         const left = this.num - this.permits;
